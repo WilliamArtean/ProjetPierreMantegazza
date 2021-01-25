@@ -5,6 +5,7 @@ public class User {
 	private String name;
 	private String password;
 	private Role role;
+	private int points;
 	
 	public String getName() {
 		return name;
@@ -26,13 +27,14 @@ public class User {
 	}
 	
 	public User() {
-		this.role = Role.NORMAL;
+		this("default", "default", Role.NORMAL);
 	}
 	
 	public User(String name, String password, Role role) {
 		this.name = name;
 		this.password = password;
 		this.role = role;
+		this.points = 0;
 	}
 	
 }
