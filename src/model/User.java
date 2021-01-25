@@ -1,11 +1,18 @@
 package model;
 
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+@Table
 public class User {
 
+	@JsonProperty
 	private String name;
+	@JsonProperty
 	private String password;
+	@JsonProperty
 	private Role role;
-	private int points;
 	
 	public String getName() {
 		return name;
@@ -34,7 +41,6 @@ public class User {
 		this.name = name;
 		this.password = password;
 		this.role = role;
-		this.points = 0;
 	}
 	
 }
