@@ -1,12 +1,16 @@
 package model;
 
 import javax.persistence.Table;
+import javax.ws.rs.Path;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Table
+@Path("/user")
 public class User {
 
+	@JsonProperty
+	private String id;
 	@JsonProperty
 	private String name;
 	@JsonProperty
@@ -32,12 +36,19 @@ public class User {
 	public void setRole(Role role) {
 		this.role = role;
 	}
-	
-	public User() {
-		this("default", "default", Role.NORMAL);
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}
 	
-	public User(String name, String password, Role role) {
+	public User() {
+		this("0", "default", "default", Role.NORMAL);
+	}
+	
+	public User(String id, String name, String password, Role role) {
+		this.id = id;
 		this.name = name;
 		this.password = password;
 		this.role = role;
