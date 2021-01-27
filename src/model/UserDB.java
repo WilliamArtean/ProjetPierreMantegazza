@@ -58,7 +58,7 @@ public class UserDB {
 	
 	@PUT
 	@Path("/createuser")
-	public void createUser(@QueryParam("id") String id, @QueryParam("name") String name, @QueryParam("password") String password, @QueryParam("role") String role) {
+	public User createUser(@QueryParam("id") String id, @QueryParam("name") String name, @QueryParam("password") String password, @QueryParam("role") String role) {
 		Role newUserRole;
 		switch (role) {
 		case "administrator":
@@ -71,7 +71,9 @@ public class UserDB {
 			newUserRole = Role.NORMAL;
 			break;
 		}
-		addUser(new User(id, name, password, newUserRole));
+		User newUser = new User(id, name, password, newUserRole);
+		addUser(newUser);
+		return newUser;
 	}
 	
 }
