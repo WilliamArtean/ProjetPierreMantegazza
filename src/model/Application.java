@@ -24,22 +24,4 @@ public class Application {
 		return this.userDB.getUsers();
 	}
 	
-	@POST
-	@Path("createuser-id={id}&name={name}&password={password}&role={role}")
-	public void createUser(@QueryParam("id") String id, @QueryParam("name") String name, @QueryParam("password") String password, @QueryParam("role") String role) {
-		Role newUserRole;
-		switch (role) {
-		case "administrator":
-			newUserRole = Role.ADMINISTRATOR;
-			break;
-		case "normal":
-			newUserRole = Role.NORMAL;
-			break;
-		default:
-			newUserRole = Role.NORMAL;
-			break;
-		}
-		createUser(id, name, password, newUserRole);
-	}
-	
 }

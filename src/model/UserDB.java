@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -55,8 +56,8 @@ public class UserDB {
 		return null;
 	}
 	
-	@POST
-	@Path("createuser-id={id}&name={name}&password={password}&role={role}")
+	@PUT
+	@Path("/createuser")
 	public void createUser(@QueryParam("id") String id, @QueryParam("name") String name, @QueryParam("password") String password, @QueryParam("role") String role) {
 		Role newUserRole;
 		switch (role) {
