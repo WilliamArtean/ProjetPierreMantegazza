@@ -15,25 +15,25 @@ public class UserController {
 		return lv;
 	}
 
-	public static User getUser(String name) {
-		if (name == null)
+	public static User getUser(String id) {
+		if (id == null)
 			return null;
 
-		User u = daoUser.find(name);
+		User u = daoUser.find(id);
 		return u;
 	}
 
-	public static User login(String name, String password) {
-		User u = daoUser.find(name);
+	public static User login(String id, String password) {
+		User u = daoUser.find(id);
 		if (u != null && u.getPassword().equals(password))
 			return u;
 		return null;
 	}
 
-	public static boolean createUser(String name, String password, Role role) {
+	public static boolean createUser(String id, String name, String password, Role role) {
 		User u = daoUser.find(name);
 		if (u == null) {
-			daoUser.create(new User(name, password, role));
+			daoUser.create(new User(id, name, password, role));
 			return true;
 		}
 		return false;

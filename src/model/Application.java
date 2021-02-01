@@ -3,8 +3,10 @@ package model;
 import java.util.List;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 
 @Path("/app")
 public class Application {
@@ -13,8 +15,6 @@ public class Application {
 	
 	public Application() {
 		this.userDB = new UserDB();
-		this.userDB.addUser(new User("user1", "user1", Role.ADMINISTRATOR));
-		this.userDB.addUser(new User("user2", "user2", Role.NORMAL));
 	}
 	
 	@GET
