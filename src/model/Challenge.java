@@ -8,6 +8,12 @@ public abstract class Challenge {
 	protected List<Segment> segments;
 	protected String name;
 	
+	public Challenge(String name, List<Checkpoint> checkpoints, List<Segment> segments) {
+		this.name = name;
+		this.checkpoints = checkpoints;
+		this.segments = segments;
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -26,5 +32,7 @@ public abstract class Challenge {
 	public void addSegments(Segment segment) {
 		this.segments.add(segment);
 	}
+	
+	
 	
 }

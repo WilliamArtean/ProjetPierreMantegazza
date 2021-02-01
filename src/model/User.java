@@ -1,8 +1,8 @@
 package model;
 
 import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 @Table
 public class User {
