@@ -19,7 +19,11 @@ public abstract class DAOAbstractFacade<T> {
 
 	private Class<T> classeEntite;
 
-
+	/**
+	 * Constructeur
+	 * 
+	 * @param classeEntite La classe de l'objet metier
+	 */
 	public DAOAbstractFacade(Class<T> classeEntite) {
 		this.classeEntite = classeEntite;
 	}
@@ -32,6 +36,11 @@ public abstract class DAOAbstractFacade<T> {
 	}
 
 
+	/**
+	 * Methode de creation d'un objet (ajout dans la base).
+	 * 
+	 * @param entite
+	 */
 	public T create(T entite) {
 		getEntityManager().getTransaction().begin();
 		getEntityManager().persist(entite);
@@ -40,24 +49,42 @@ public abstract class DAOAbstractFacade<T> {
 		return entite;
 	}
 
-
+	/**
+	 * Methode de modification d'un objet.
+	 * 
+	 * @param entite
+	 */
 	public void edit(T entite) {
 		getEntityManager().getTransaction().begin();
 		getEntityManager().merge(entite);
 		getEntityManager().getTransaction().commit();
 	}
 
-
+	/**
+	 * Methode de suppression d'un objet.
+	 * 
+	 * @param entite
+	 */
 	public void remove(T entite) {
 		getEntityManager().remove(getEntityManager().merge(entite));
 	}
 
-
+	/**
+	 * Methode de recherche d'un objet a partir de son identifiant.
+	 * 
+	 * @param id
+	 * @return
+	 * @return
+	 */
 	public T find(Object id) {
 		return getEntityManager().find(classeEntite, id);
 	}
 
-
+	/**
+	 * Methode recherchant tous les objets de ce type.
+	 * 
+	 * @return
+	 */
 	public ArrayList<T> findAll() {
 		@SuppressWarnings("unchecked")
 		CriteriaQuery<T> cq = (CriteriaQuery<T>) getEntityManager().getCriteriaBuilder().createQuery();
@@ -68,7 +95,11 @@ public abstract class DAOAbstractFacade<T> {
 		return null;
 	}
 
-
+	/**
+	 * Methode renvoyant le nombre d'objet de ce type.
+	 * 
+	 * @return
+	 */
 	public int count() {
 		CriteriaQuery<Object> cq = getEntityManager().getCriteriaBuilder().createQuery();
 		javax.persistence.criteria.Root<T> rt = cq.from(classeEntite);
