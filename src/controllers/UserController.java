@@ -15,27 +15,36 @@ public class UserController {
 		return lv;
 	}
 
-	public static User getUser(String id) {
-		if (id == null)
-			return null;
-
-		User u = daoUser.find(id);
-		return u;
+	public static User getUser(long id) {
+		return daoUser.find(id);
 	}
 
-	public static User login(String id, String password) {
-		User u = daoUser.find(id);
+	public static User getUserByName(String name) {
+		return daoUser.findByName(name);
+	}
+	
+	public static User login(String login, String password) {
+		User u = daoUser.findByName(login);
 		if (u != null && u.getPassword().equals(password))
 			return u;
 		return null;
 	}
 
-	public static boolean createUser(String id, String name, String password, Role role) {
+	public static boolean createUser(String name, String password, List<Role> roles) {
 		User u = daoUser.find(name);
 		if (u == null) {
-			daoUser.create(new User(id, name, password, role));
+			daoUser.create(new User(name, password, roles));
 			return true;
 		}
 		return false;
+	}
+	
+	public static boolean removeUser(long id) {
+		User u = daoUser.find(id);
+		if(u == null) {
+			return false;
+		}
+		daoUser.remove(u);
+		return true;
 	}
 }

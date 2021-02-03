@@ -1,24 +1,30 @@
 package model;
 
-import javax.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.ws.rs.Path;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 
-@Table
-@Path("/user")
+@Entity
 public class User {
 
-	@JsonProperty
-	private String id;
-	@JsonProperty
+	@Id
+	@GeneratedValue
+	private long id;
+
+	@Column(unique=true)
 	private String name;
-	@JsonProperty
+
 	private String password;
-	@JsonProperty
-	private Role role;
+	
+	private List<Role> roles;
 	
 	public String getName() {
 		return name;
@@ -32,28 +38,31 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public Role getRole() {
-		return role;
+	public List<Role> getRoles() {
+		return roles;
 	}
-	public void setRole(Role role) {
-		this.role = role;
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
 	}
-	public String getId() {
+	public long getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	
 	public User() {
-		this("0", "default", "default", Role.NORMAL);
+		this("default", "default", new ArrayList<Role>());
+		List<Role> roles = new ArrayList<Role>();
+		roles.add(Role.NORMAL);
+		this.setRoles(roles);
 	}
 	
-	public User(String id, String name, String password, Role role) {
-		this.id = id;
+	public User(String name, String password, List<Role> roles) {
+		this.id = 0;
 		this.name = name;
 		this.password = password;
-		this.role = role;
+		this.roles = roles;
 	}
 	
 }
